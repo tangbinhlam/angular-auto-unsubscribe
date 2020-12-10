@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-auto-unsubscribe"
+    }
+  },
+  "defaultProject": "angular-auto-unsubscribe",
+  "cli": {
+    "analytics": false
+  }
 }

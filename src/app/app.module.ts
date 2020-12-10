@@ -6,19 +6,24 @@ import { UnsubscribeMethodComponent } from './unsubscribe-method/unsubscribe-met
 import { UnsubscribeAsyncPipeComponent } from './unsubscribe-async-pipe/unsubscribe-async-pipe.component';
 import { UnsubscribeUseRxjsComponent } from './unsubscribe-use-rxjs/unsubscribe-use-rxjs.component';
 import { UnsubscribeUseDecoratorAutomateComponent } from './unsubscribe-use-decorator-automate/unsubscribe-use-decorator-automate.component';
+import { Router, RouterModule, Routes } from '@angular/router';
 
+const routers: Routes = [
+  {
+    path: 'uns-method',
+    component: UnsubscribeMethodComponent,
+  },
+];
 @NgModule({
   declarations: [
     AppComponent,
     UnsubscribeMethodComponent,
     UnsubscribeAsyncPipeComponent,
     UnsubscribeUseRxjsComponent,
-    UnsubscribeUseDecoratorAutomateComponent
+    UnsubscribeUseDecoratorAutomateComponent,
   ],
-  imports: [
-    BrowserModule
-  ],
+  imports: [BrowserModule, RouterModule.forRoot(routers)],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

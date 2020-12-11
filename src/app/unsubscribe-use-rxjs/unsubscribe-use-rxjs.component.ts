@@ -29,6 +29,9 @@ export class UnsubscribeUseRxjsComponent implements OnInit {
 
   takeWhileCount = 0;
 
+  takeFirstCount = 0;
+  takeFirstValue = 0;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -59,14 +62,15 @@ export class UnsubscribeUseRxjsComponent implements OnInit {
         this.takeWhileCount++;
         console.log(printValue);
       });
-    /*
-    this.subcriptionTake = interval(1000).subscribe((value) => {
-      console.log(`Print value with method rxjs.takeWhile ${value}`);
-    });
-    this.subcriptionTake = interval(1000).subscribe((value) => {
-      console.log(`Print value with method rxjs.first ${value}`);
-    });
-    */
+
+    this.subcriptionFirst = interval(1000)
+      .pipe(first((value) => value === 10))
+      .subscribe((value) => {
+        const printValue = `Print value with method rxjs.first ${value}`;
+        this.takeFirstCount++;
+        this.takeFirstValue = value;
+        console.log(printValue);
+      });
   }
 
   onClickSopWithTakeUntil() {

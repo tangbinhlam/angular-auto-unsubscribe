@@ -70,3 +70,36 @@ The problem happend when you forgot unsubscribe that cause the memory leak probl
   in *.html
   <h2  *ngIf="values$ | async as values">Running: <span>{{values}}</span></h2>
 ```
+### 3: Allow auto Unsubscribe by overwrite ngOnDestroy by use prototype.ngOnDestroy
+
+#### Steps
+1. Overwrite ngOnDestroy
+```
+export function AutoUnsubscribe(constructor) {
+  const original = constructor.prototype.ngOnDestroy;
+
+  constructor.prototype.ngOnDestroy = function () {
+    for (let prop in this) {
+      const property = this[prop];
+      if (property && typeof property.unsubscribe === 'function') {
+        property.unsubscribe();
+      }
+    }
+    original &&
+      typeof original === 'function' &&
+      original.apply(this, arguments);
+  };
+}
+```
+2. Apply in Component
+For apply you must:
+  - Declare subcription1: Subscription;
+  - Assign subscribe to subcription1
+```
+  subcription4: Subscription;
+
+  this.subcription1 = interval(1000).subscribe((value) => {
+      const printValue = `Print value with auto unSubscribe1 ${value}`;
+      console.log(printValue);
+    });
+```

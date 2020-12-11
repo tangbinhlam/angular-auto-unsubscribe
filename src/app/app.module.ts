@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { UnsubscribeMethodComponent } from './unsubscribe-method/unsubscribe-method.component';
@@ -20,6 +20,10 @@ const routers: Routes = [
   {
     path: 'async-pipe',
     component: UnsubscribeAsyncPipeComponent,
+  },
+  {
+    path: 'auto-unsubscribe',
+    component: UnsubscribeUseDecoratorAutomateComponent,
   },
 ];
 @NgModule({

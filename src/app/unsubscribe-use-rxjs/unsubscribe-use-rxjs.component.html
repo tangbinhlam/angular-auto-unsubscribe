@@ -1,5 +1,15 @@
-<div>
-  <h1> Resolve problem with take(n)</h1>
-  <h5 *ngFor="let item of takeItems">{{item}}</h5>
-  <p>Resolve problem with use take in Rxjs operator after 5 times subscript it auto unsubscribe</p>
+<div class="wrapper">
+  <div class="item">
+    <h1> Resolve problem with take(n)</h1>
+    <h5 >Print value with method rxjs.take (<span>{{takeCount}}</span>) times</h5>
+    <p>Resolve problem with use take in Rxjs operator after 5 times subscript it auto unsubscribe</p>
+  </div>
+
+  <div class="item">
+    <h1> Resolve problem with takeUntil</h1>
+    <button class="btn blue" (click)="onClickSopWithTakeUntil()">Stop with takeUntil</button>
+    <h5 >Print value with method rxjs.takeUntil (<span>{{takeUntilCount}}</span>) times</h5>
+    <p>Resolve problem with use take in Rxjs operator after takeUntil</p>
+  </div>
+
 </div>

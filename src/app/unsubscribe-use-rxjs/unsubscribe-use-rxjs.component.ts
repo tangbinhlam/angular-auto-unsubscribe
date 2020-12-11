@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
+import { interval, Subject, Subscription } from 'rxjs';
 import {
   map,
   delay,
@@ -22,8 +22,10 @@ export class UnsubscribeUseRxjsComponent implements OnInit {
   subcriptionTakeWhile: Subscription;
   subcriptionFirst: Subscription;
 
-  takeItems = [];
-  takeUntilItems = [];
+  takeCount = 0;
+
+  notifier = new Subject();
+  takeUntilCount = 0;
 
   constructor() {}
 
@@ -34,12 +36,19 @@ export class UnsubscribeUseRxjsComponent implements OnInit {
     this.subcriptionTake = interval(1000)
       .pipe(take(5))
       .subscribe((value) => {
-        this.takeItems.push(`Print value with method rxjs.take ${value}`);
+        const printValue = `Print value with method rxjs.take ${value}`;
+        this.takeCount++;
+        console.log(printValue);
       });
 
-    // this.subcriptionTake = interval(1000).subscribe((value) => {
-    //   console.log(`Print value with method rxjs.takeUntil ${value}`);
-    // });
+    // Resolve problem with use takeUntil in Rxjs operator
+    this.subcriptionTakeUntil = interval(1000)
+      .pipe(takeUntil(this.notifier))
+      .subscribe((value) => {
+        const printValue = `Print value with method rxjs.takeUntil ${value}`;
+        this.takeUntilCount++;
+        console.log(printValue);
+      });
     /*
     this.subcriptionTake = interval(1000).subscribe((value) => {
       console.log(`Print value with method rxjs.takeWhile ${value}`);
@@ -48,5 +57,10 @@ export class UnsubscribeUseRxjsComponent implements OnInit {
       console.log(`Print value with method rxjs.first ${value}`);
     });
     */
+  }
+
+  onClickSopWithTakeUntil() {
+    this.notifier.next();
+    this.notifier.complete();
   }
 }

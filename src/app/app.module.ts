@@ -17,6 +17,10 @@ const routers: Routes = [
     path: 'uns-rxjs',
     component: UnsubscribeUseRxjsComponent,
   },
+  {
+    path: 'async-pipe',
+    component: UnsubscribeAsyncPipeComponent,
+  },
 ];
 @NgModule({
   declarations: [

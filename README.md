@@ -57,3 +57,16 @@ The problem happend when you forgot unsubscribe that cause the memory leak probl
         ...
       });
 ```
+
+### 3: Use the aysn pipe with allow auto subscribe and Unsubscribe
+```
+  in *.ts
+  values$: Observable<number>;
+
+  ngOnInit(): void {
+    this.values$ = interval(1000);
+  }
+
+  in *.html
+  <h2  *ngIf="values$ | async as values">Running: <span>{{values}}</span></h2>
+```

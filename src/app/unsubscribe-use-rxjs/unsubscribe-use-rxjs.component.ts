@@ -27,6 +27,8 @@ export class UnsubscribeUseRxjsComponent implements OnInit {
   notifier = new Subject();
   takeUntilCount = 0;
 
+  takeWhileCount = 0;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -47,6 +49,14 @@ export class UnsubscribeUseRxjsComponent implements OnInit {
       .subscribe((value) => {
         const printValue = `Print value with method rxjs.takeUntil ${value}`;
         this.takeUntilCount++;
+        console.log(printValue);
+      });
+
+    this.subcriptionTakeWhile = interval(1000)
+      .pipe(takeWhile((value) => value < 7))
+      .subscribe((value) => {
+        const printValue = `Print value with method rxjs.takeWhile ${value}`;
+        this.takeWhileCount++;
         console.log(printValue);
       });
     /*

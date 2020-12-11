@@ -1,15 +1,19 @@
-export function AutoUnsubscribe(constructor) {
+export function AutoUnsubscribe(constructor): void {
   const original = constructor.prototype.ngOnDestroy;
 
-  constructor.prototype.ngOnDestroy = function () {
-    for (let prop in this) {
-      const property = this[prop];
-      if (property && typeof property.unsubscribe === 'function') {
-        property.unsubscribe();
+  function destroy(): void {
+    for (const prop in this) {
+      if (this.hasOwnProperty(prop)) {
+        const property = this[prop];
+        if (property && typeof property.unsubscribe === 'function') {
+          property.unsubscribe();
+        }
       }
     }
-    original &&
-      typeof original === 'function' &&
+    if (original && typeof original === 'function') {
       original.apply(this, arguments);
-  };
+    }
+  }
+
+  constructor.prototype.ngOnDestroy = destroy;
 }

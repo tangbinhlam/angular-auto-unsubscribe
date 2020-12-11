@@ -73,7 +73,7 @@ export class UnsubscribeUseRxjsComponent implements OnInit {
       });
   }
 
-  onClickSopWithTakeUntil() {
+  onClickSopWithTakeUntil(): void {
     this.notifier.next();
     this.notifier.complete();
   }

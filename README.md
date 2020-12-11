@@ -70,7 +70,7 @@ The problem happend when you forgot unsubscribe that cause the memory leak probl
   in *.html
   <h2  *ngIf="values$ | async as values">Running: <span>{{values}}</span></h2>
 ```
-### 3: Allow auto Unsubscribe by overwrite ngOnDestroy by use prototype.ngOnDestroy
+### 4: Allow auto Unsubscribe by overwrite ngOnDestroy by use prototype.ngOnDestroy
 
 #### Steps
 1. Overwrite ngOnDestroy

@@ -13,6 +13,10 @@ const routers: Routes = [
     path: 'uns-method',
     component: UnsubscribeMethodComponent,
   },
+  {
+    path: 'uns-rxjs',
+    component: UnsubscribeUseRxjsComponent,
+  },
 ];
 @NgModule({
   declarations: [
